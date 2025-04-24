@@ -1,3 +1,10 @@
+.svelte-kit
+.gitignore
+.git
+.history
+.svelte-kit
+.vscode
+
 # Logs
 logs
 *.log
