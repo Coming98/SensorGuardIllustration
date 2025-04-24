@@ -607,7 +607,11 @@
 			{/each}
 		</div> -->
 		<div class="chart-title">
-			<div class="declarative">Per-App Sensor Usage Details on Android-Wear</div>
+			<div class="declarative">Per-App Sensor Usage Details on 
+                <span style="color: {densityButtonNameColors(sortbyName)};"
+                >{selectedCategory}</span
+            >
+            </div>
 			<div class="interpretive">
 				Apps Tend to Co-Activate Multiple Sensors in a Synchronized Manner
 			</div>

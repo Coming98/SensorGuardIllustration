@@ -58,8 +58,8 @@
 
 	// Grouped data by colorFeature
 	const groupedIllustrationData = $derived(getGroupedIllustrationData(illustrationData));
-	console.log('groupedIllustrationData', groupedIllustrationData);
-	function getGroupedIllustrationData(illustrationData) {
+	
+    function getGroupedIllustrationData(illustrationData) {
 		const result = {};
 
 		Object.entries(illustrationData).forEach(([key, value]) => {

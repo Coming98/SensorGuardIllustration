@@ -134,7 +134,7 @@
 		{height}
 		{marginLeft}
 		{marginBottom}
-		label={selectedCategory}
+		label="Sensor"
 	/>
 </svg>
 

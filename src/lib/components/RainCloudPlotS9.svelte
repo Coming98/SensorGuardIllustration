@@ -174,7 +174,7 @@
 		{height}
 		{marginLeft}
 		{marginBottom}
-		label={'Frequency'}
+		label={'Frequency (Hz)'}
 	/>
 </svg>
 

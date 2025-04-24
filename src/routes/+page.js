@@ -1,13 +1,6 @@
 import * as d3 from 'd3';
 
 export async function load({ fetch }) {
-    // load the csv file as a string
-    const res = await fetch('/mlb-hitters-2023.csv');
-    if (!res.ok) throw new Error('Failed to load mlb-hitters-2023.csv');
-    const text = await res.text();
-    // parse the string into an array of objects.
-    // d3.autoType will automatically detect the types of the columns
-    const dataset = d3.csvParse(text, d3.autoType);
 
     const res_s9 = await fetch('/S9-10-sensor_data.csv');
     if (!res_s9.ok) throw new Error('Failed to load S9-10-sensor_data.csv');
@@ -24,7 +17,7 @@ export async function load({ fetch }) {
     // Parse the JSON using d3.jsonParse and d3.autoType for auto type detection
     const dataset_s9_show = JSON.parse(text_S9_json);
     // const dataset_s9_show = jsonArray.map(d3.autoType);
-    return { dataset, dataset_s9, dataset_s9_aggregate, dataset_s9_show };
+    return { dataset_s9, dataset_s9_aggregate, dataset_s9_show };
 }
 function transformSensorData(sensorData) {
     const REGION_NAMES = ['INSTL', 'FG', 'BG', 'STOP', 'RM'];
