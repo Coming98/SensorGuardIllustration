@@ -12,7 +12,8 @@ export default {
       strict: true
     }),
     paths: {
-      base: dev ? '' : '/SensorGuardIllustration',
+    //   base: dev ? '' : '/SensorGuardIllustration',
+      base: '/SensorGuardIllustration',
     }
   }
 };
