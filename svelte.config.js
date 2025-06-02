@@ -8,7 +8,8 @@ export default {
     adapter: adapter({
       pages: 'build',
       assets: 'build',
-      fallback: null
+      fallback: 'index.html',
+      strict: true
     }),
     paths: {
       base: dev ? '' : '/SensorGuardIllustration',
