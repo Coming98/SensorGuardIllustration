@@ -1,8 +1,8 @@
 <script>
 	import * as d3 from 'd3';
 	import './style.css';
-	import BarChartS9 from '$lib/components/BarChartS9.svelte';
-	import RainCloudPlotS9 from '../lib/components/RainCloudPlotS9.svelte';
+	import BarChart from '$lib/components/BarChart.svelte';
+	import RainCloudPlot from '../lib/components/RainCloudPlot.svelte';
 	import StagePieChart from '../lib/components/StagePieChart.svelte';
 	import FreqLineCharts from '../lib/components/FreqLineCharts.svelte';
 	import ColorLegend from '../lib/components/ColorLegend.svelte';
@@ -10,7 +10,7 @@
 	let { data } = $props();
 
 	// ########################## Thresholds Control ##########################
-	let AccelerometerThresholds = $state(1.5);
+	let AccelerometerThresholds = $state(data.item_name === "OnePlus-12-Armour" ? 5.5 : 1.5);
 	let GyroscopeThresholds = $state(1.5);
 	let MagnetometerThresholds = $state(1.5);
 	let thresholds = $derived({
@@ -51,20 +51,20 @@
 		.domain(densityButtonNames)
 		.range(densityColorNames);
 
-	let categories_s9 = $derived(
+	let categories_item = $derived(
 		d3
 			.groupSort(
-				data.dataset_s9_aggregate,
+				data.dataset_item_aggregate,
 				(g) => g.length,
 				(item) => item['Category']
 			)
 			.reverse()
 	);
 	let selectedButtonNames = $state(new Set(targetSensors));
-	let selectedCategories = $derived(new Set(categories_s9));
+	let selectedCategories = $derived(new Set(categories_item));
 	let selectedDensityNames = $derived(getSelectedDensityNames(selectedButtonNames, targetSensors));
 	let toggleOverviewCategoryButtonName = $derived(
-		selectedCategories.size >= categories_s9.length / 2 ? 'Reverse' : 'Select All'
+		selectedCategories.size >= categories_item.length / 2 ? 'Reverse' : 'Select All'
 	);
 
 	let sortbyName = $state(targetSensors[0]);
@@ -72,7 +72,7 @@
 	let hoveredButtonName = $state(null);
 	let illustrationData = $derived(
 		processDataset(
-			data.dataset_s9_aggregate,
+			data.dataset_item_aggregate,
 			targetSensors,
 			multipleSensorUsageNames,
 			selectedButtonNames
@@ -126,10 +126,10 @@
 
 	function toggleSelectedCategories() {
 		if (toggleOverviewCategoryButtonName === 'Select All') {
-			selectedCategories = new Set(categories_s9);
+			selectedCategories = new Set(categories_item);
 		} else {
 			let unselectedCategories = new Set();
-			categories_s9.forEach((category) => {
+			categories_item.forEach((category) => {
 				if (!selectedCategories.has(category)) {
 					unselectedCategories.add(category);
 				}
@@ -350,7 +350,7 @@
 
 <div class="container">
 	<div class="header">
-		<h1>Sensor Guard: Uncovering Zero-permission Sensor Usage Patterns and Abuse Cases</h1>
+		<h1>ARMOUR US: Monitoring Android Zero-permission Sensor Usage From User Space</h1>
 	</div>
 	<div class="overview">
 		<div class="bar-chart-control button-group">
@@ -366,7 +366,7 @@
 					{buttonName}
 				</button>
 			{/each}
-			{#if selectedCategories.size === categories_s9.length}
+			{#if selectedCategories.size === categories_item.length}
 				<button class="unclickableButton">
 					{toggleOverviewCategoryButtonName}
 				</button>
@@ -406,7 +406,7 @@
 			</div>
 		</div>
 		<div class="bar-chart-overview">
-			<BarChartS9
+			<BarChart
 				{illustrationData}
 				categories={sortedCategories}
 				{targetSensors}
@@ -556,8 +556,8 @@
 				bind:clientWidth={width_detail}
 				bind:clientHeight={height_detail}
 			>
-				<RainCloudPlotS9
-					dataset={data.dataset_s9}
+				<RainCloudPlot
+					dataset={data.dataset_item}
 					{thresholds}
 					{selectedDensityNames}
 					{selectedCategories}
@@ -579,7 +579,7 @@
 				bind:clientHeight={height_detail}
 			>
 				<StagePieChart
-					dataset={data.dataset_s9_aggregate}
+					dataset={data.dataset_item_aggregate}
 					{thresholds}
 					{selectedDensityNames}
 					{selectedStageButtonNames}
@@ -618,8 +618,8 @@
 		</div>
 		<div class="app-list">
 			<FreqLineCharts
-				dataset={data.dataset_s9_aggregate}
-				dataset_line={data.dataset_s9_show}
+				dataset={data.dataset_item_aggregate}
+				dataset_line={data.dataset_item_show}
 				{thresholds}
 				{selectedCategory}
 				{targetSensors}

@@ -2,22 +2,23 @@ import * as d3 from 'd3';
 
 export async function load({ fetch }) {
 
-    const res_s9 = await fetch('/S9-10-sensor_data.csv');
-    if (!res_s9.ok) throw new Error('Failed to load S9-10-sensor_data.csv');
-    const text_s9 = await res_s9.text();
+    const item_name = 'OnePlus-12-Armour';
+    const res_item = await fetch(`/${item_name}-Sensor_data.csv`);
+    if (!res_item.ok) throw new Error(`Failed to load ${item_name}-Sensor_data.csv`);
+    const text_item = await res_item.text();
     // parse the string into an array of objects.
     // d3.autoType will automatically detect the types of the columns
-    const dataset_s9 = d3.csvParse(text_s9, d3.autoType);
-    const dataset_s9_aggregate = transformSensorData(dataset_s9)
+    const dataset_item = d3.csvParse(text_item, d3.autoType);
+    const dataset_item_aggregate = transformSensorData(dataset_item)
 
     // load the json data in '/static/S9.json'
-    const res_S9_json = await fetch('/S9.json');
-    if (!res_S9_json.ok) throw new Error('Failed to load S9.json');
-    const text_S9_json = await res_S9_json.text();
+    const res_item_json = await fetch(`/${item_name}.json`);
+    if (!res_item_json.ok) throw new Error(`Failed to load ${item_name}.json`);
+    const text_item_json = await res_item_json.text();
     // Parse the JSON using d3.jsonParse and d3.autoType for auto type detection
-    const dataset_s9_show = JSON.parse(text_S9_json);
-    // const dataset_s9_show = jsonArray.map(d3.autoType);
-    return { dataset_s9, dataset_s9_aggregate, dataset_s9_show };
+    const dataset_item_show = JSON.parse(text_item_json);
+    // const dataset_item_show = jsonArray.map(d3.autoType);
+    return { dataset_item, dataset_item_aggregate, dataset_item_show, item_name };
 }
 function transformSensorData(sensorData) {
     const REGION_NAMES = ['INSTL', 'FG', 'BG', 'STOP', 'RM'];
