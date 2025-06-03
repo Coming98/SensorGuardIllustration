@@ -468,32 +468,18 @@
 	<div class="details">
 		<div class="control-pannel">
 			<div class="details-control button-group">
-				<div class="details-control-row">
-					{#each stageButtonNames.slice(0, 3) as stageButtonName}
-						<button
-							style={getStageButtonStyle(stageButtonName)}
-							class:selected={selectedStageButtonNames.has(stageButtonName)}
-							onclick={() => toggleStageButton(stageButtonName)}
-							onmouseover={() => (hoveredButtonName = stageButtonName)}
-							onmouseout={() => (hoveredButtonName = null)}
-						>
-							{stageButtonName}
-						</button>
-					{/each}
-				</div>
-				<div class="details-control-row">
-					{#each stageButtonNames.slice(3) as stageButtonName}
-						<button
-							style={getStageButtonStyle(stageButtonName)}
-							class:selected={selectedStageButtonNames.has(stageButtonName)}
-							onclick={() => toggleStageButton(stageButtonName)}
-							onmouseover={() => (hoveredButtonName = stageButtonName)}
-							onmouseout={() => (hoveredButtonName = null)}
-						>
-							{stageButtonName}
-						</button>
-					{/each}
-				</div>
+				{#each stageButtonNames as stageButtonName}
+					<!-- svelte-ignore a11y_mouse_events_have_key_events -->
+					<button
+						style={getStageButtonStyle(stageButtonName)}
+						class:selected={selectedStageButtonNames.has(stageButtonName)}
+						onclick={() => toggleStageButton(stageButtonName)}
+						onmouseover={() => (hoveredButtonName = stageButtonName)}
+						onmouseout={() => (hoveredButtonName = null)}
+					>
+						{stageButtonName}
+					</button>
+				{/each}
 			</div>
 			<div class="sensor-threshold-control">
 				<div class="control-unit">
@@ -1036,19 +1022,4 @@
     a {
         text-decoration: none;
     }
-
-	.details-control.button-group {
-		display: flex;
-		flex-direction: column;
-		gap: 1em;
-		align-items: center;
-		justify-content: center;
-	}
-	.details-control-row {
-		display: flex;
-		flex-direction: row;
-		gap: 2em;
-		align-items: center;
-		justify-content: center;
-	}
 </style>
