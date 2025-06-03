@@ -349,8 +349,35 @@
 </script>
 
 <div class="container">
-	<div class="header">
-		<h1>ARMOUR US: Monitoring Android Zero-permission Sensor Usage From User Space</h1>
+	<div class="paper-info">
+		<div class="paper-title">
+			<h2>ARMOUR US: Monitoring Android Zero-permission Sensor Usage From User Space</h2>
+		</div>
+		<div class="authors">
+			<div class="author-group">
+				<div><a href="https://yanlong.site/" target="_blank" rel="noopener noreferrer" class="author-link">Yan Long</a><sup>1</sup></div>
+				<div><a href="https://www.linkedin.com/in/tobias-alam-5a4057215/" target="_blank" rel="noopener noreferrer" class="author-link">Tobias Alam</a><sup>3</sup></div>
+			</div>
+			<div class="author-group">
+				<div><a href="https://jiancongcui.github.io/" target="_blank" rel="noopener noreferrer" class="author-link">Jiancong Cui</a><sup>1</sup></div>
+				<div><a href="https://zhiqlin.github.io/" target="_blank" rel="noopener noreferrer" class="author-link">Zhiqiang Lin</a><sup>2</sup></div>
+			</div>
+			<div class="author-group">
+				<div><a href="https://frostwing98.com/" target="_blank" rel="noopener noreferrer" class="author-link">Yuqing Yang</a><sup>2</sup></div>
+				<div><a href="https://web.eecs.umich.edu/~kevinfu/" target="_blank" rel="noopener noreferrer" class="author-link">Kevin Fu</a><sup>1</sup></div>
+			</div>
+		</div>
+		<div class="affiliations">
+            <div class="affiliation">
+				<img src="/logos/NU-logo.svg" alt="UF" style="height:60px;vertical-align:middle;" />
+			</div>
+			<div class="affiliation">
+				<img src="/logos/OSU-logo.png" alt="UM" style="height:60px;vertical-align:middle;" />
+			</div>
+			<div class="affiliation">
+				<img src="/logos/Umich-logo.jpg" alt="UM" style="height:60px;vertical-align:middle;" />
+			</div>
+		</div>
 	</div>
 	<div class="overview">
 		<div class="bar-chart-control button-group">
@@ -441,18 +468,32 @@
 	<div class="details">
 		<div class="control-pannel">
 			<div class="details-control button-group">
-				{#each stageButtonNames as stageButtonName}
-					<!-- svelte-ignore a11y_mouse_events_have_key_events -->
-					<button
-						style={getStageButtonStyle(stageButtonName)}
-						class:selected={selectedStageButtonNames.has(stageButtonName)}
-						onclick={() => toggleStageButton(stageButtonName)}
-						onmouseover={() => (hoveredButtonName = stageButtonName)}
-						onmouseout={() => (hoveredButtonName = null)}
-					>
-						{stageButtonName}
-					</button>
-				{/each}
+				<div class="details-control-row">
+					{#each stageButtonNames.slice(0, 3) as stageButtonName}
+						<button
+							style={getStageButtonStyle(stageButtonName)}
+							class:selected={selectedStageButtonNames.has(stageButtonName)}
+							onclick={() => toggleStageButton(stageButtonName)}
+							onmouseover={() => (hoveredButtonName = stageButtonName)}
+							onmouseout={() => (hoveredButtonName = null)}
+						>
+							{stageButtonName}
+						</button>
+					{/each}
+				</div>
+				<div class="details-control-row">
+					{#each stageButtonNames.slice(3) as stageButtonName}
+						<button
+							style={getStageButtonStyle(stageButtonName)}
+							class:selected={selectedStageButtonNames.has(stageButtonName)}
+							onclick={() => toggleStageButton(stageButtonName)}
+							onmouseover={() => (hoveredButtonName = stageButtonName)}
+							onmouseout={() => (hoveredButtonName = null)}
+						>
+							{stageButtonName}
+						</button>
+					{/each}
+				</div>
 			</div>
 			<div class="sensor-threshold-control">
 				<div class="control-unit">
@@ -638,45 +679,6 @@
 	</div>
 </div>
 
-<!-- '#9444a0',
-			'#bd7ebe',
-			'#d9aeda',
-			'#9444a0',
-			'#bd7ebe',
-			'#d9aeda',
-			'#9444a0',
-			'#bd7ebe',
-			'#d9aeda',
-			'#9444a0',
-			'#bd7ebe',
-			'#d9aeda',
-
-			'#e39b2f',
-			'#ffb55a',
-			'#ffd7a4',
-			'#e39b2f',
-			'#ffb55a',
-			'#ffd7a4',
-			'#e39b2f',
-			'#ffb55a',
-			'#ffd7a4',
-			'#e39b2f',
-			'#ffb55a',
-			'#ffd7a4',
-
-			'#5db3a9',
-			'#8bd3c7',
-			'#b8ece3',
-			'#5db3a9',
-			'#8bd3c7',
-			'#b8ece3',
-			'#5db3a9',
-			'#8bd3c7',
-			'#b8ece3',
-			'#5db3a9',
-			'#8bd3c7',
-			'#b8ece3' -->
-
 <style>
 	.container {
 		/* set the font */
@@ -696,9 +698,93 @@
 		margin: 0 auto;
 	}
 
-	.header {
-		margin: 1em 0;
+	.paper-info {
+		width: 100vw;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-bottom: 1em;
+	}
+	.paper-title {
 		text-align: center;
+		color: #4a90e2;
+		font-size: 1.8em;
+		font-weight: bold;
+		margin-bottom: 1.5em;
+        margin-top: 2em;
+	}
+	.authors {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		gap: 5em;
+		font-size: 1.5em;
+		color: #2196f3;
+		margin-bottom: 2em;
+	}
+	.author-group {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.2em;
+	}
+
+    .author-group div sup {
+        margin-left: 0.2em;
+        font-size: 0.6em;
+        color: black;
+    }
+	.affiliations {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		gap: 4em;
+		align-items: center;
+		margin-bottom: 1em;
+	}
+	.affiliation {
+		display: flex;
+		align-items: center;
+		gap: 0.5em;
+		font-size: 1.3em;
+		font-weight: bold;
+		position: relative;
+	}
+	.affiliation:nth-child(1)::before {
+		content: '1';
+		position: absolute;
+		top: -0.7em;
+		left: -0.9em;
+		font-size: 0.9em;
+		width: 1.3em;
+		height: 1.3em;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.affiliation:nth-child(2)::before {
+		content: '2';
+		position: absolute;
+		top: -0.7em;
+		left: -0.9em;
+		font-size: 0.9em;
+		width: 1.3em;
+		height: 1.3em;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.affiliation:nth-child(3)::before {
+		content: '3';
+		position: absolute;
+		top: -0.7em;
+		left: -0.9em;
+		font-size: 0.9em;
+		width: 1.3em;
+		height: 1.3em;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 	.overview {
@@ -938,5 +1024,31 @@
 	.interpretive {
 		font-size: 1.2em;
 		color: #555;
+	}
+	.author-link {
+		color: #4aa3f3;
+		transition: color 0.2s;
+	}
+	.author-link:hover {
+		color: #1976d2;
+	}
+
+    a {
+        text-decoration: none;
+    }
+
+	.details-control.button-group {
+		display: flex;
+		flex-direction: column;
+		gap: 1em;
+		align-items: center;
+		justify-content: center;
+	}
+	.details-control-row {
+		display: flex;
+		flex-direction: row;
+		gap: 2em;
+		align-items: center;
+		justify-content: center;
 	}
 </style>
