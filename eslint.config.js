@@ -5,11 +5,11 @@ import svelte from 'eslint-plugin-svelte';
 import globals from 'globals';
 import { fileURLToPath } from 'node:url';
 import svelteConfig from './svelte.config.js';
-const gitignorePath = fileURLToPath(new URL('./.gitignore', import.meta.url));
+// const gitignorePath = fileURLToPath(new URL('./.gitignore', import.meta.url));
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-    includeIgnoreFile(gitignorePath),
+    // includeIgnoreFile(gitignorePath),
     js.configs.recommended,
     ...svelte.configs.recommended,
     prettier,
