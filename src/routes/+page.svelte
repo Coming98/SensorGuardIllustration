@@ -369,13 +369,13 @@
 		</div>
 		<div class="affiliations">
             <div class="affiliation">
-				<img src="/logos/NU-logo.svg" alt="UF" style="height:60px;vertical-align:middle;" />
+				<img src="logos/NU-logo.svg" alt="UF" style="height:60px;vertical-align:middle;" />
 			</div>
 			<div class="affiliation">
-				<img src="/logos/OSU-logo.png" alt="UM" style="height:60px;vertical-align:middle;" />
+				<img src="logos/OSU-logo.png" alt="UM" style="height:60px;vertical-align:middle;" />
 			</div>
 			<div class="affiliation">
-				<img src="/logos/Umich-logo.jpg" alt="UM" style="height:60px;vertical-align:middle;" />
+				<img src="logos/Umich-logo.jpg" alt="UM" style="height:60px;vertical-align:middle;" />
 			</div>
 		</div>
 	</div>
