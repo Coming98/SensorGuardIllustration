@@ -1,20 +1,15 @@
-// import adapter from '@sveltejs/adapter-auto';
 import adapter from '@sveltejs/adapter-static';
 
-const dev = process.env.NODE_ENV === 'development';
+const dev = process.argv.includes('dev');
 
-export default {
-  kit: {
-    adapter: adapter({
-      pages: 'build',
-      assets: 'build',
-      fallback: 'index.html',
-      strict: true
-    }),
-    paths: {
-      base: dev ? '' : '/SensorGuardIllustration',
+/** @type {import('@sveltejs/kit').Config} */
+const config = {
+    kit: {
+        adapter: adapter(),
+        paths: {
+            base: dev ? '' : process.env.BASE_PATH,
+        }
     }
-  }
 };
 
 // /** @type {import('@sveltejs/kit').Config} */
